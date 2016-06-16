@@ -1,0 +1,62 @@
+{
+    "name": "tessel2",
+    "displayName": "tessel2",
+    "description": "Tessel2 CLI integration for Visual Studio Code",
+    "version": "0.0.1",
+    "publisher": "pmcalabrese",
+    "engines": {
+        "vscode": "^1.0.0"
+    },
+    "categories": [
+        "Other"
+    ],
+    "activationEvents": [
+        "onCommand:extension.t2_list",
+        "onCommand:extension.t2_rename",
+        "onCommand:extension.t2_wifi_connect",
+        "onCommand:extension.t2_wifi",
+        "onCommand:extension.t2_provision",
+        "onCommand:extension.t2_update",
+        "onCommand:extension.t2_init"
+    ],
+    "main": "./out/src/extension",
+    "contributes": {
+        "commands": [{
+            "command": "extension.t2_list",
+            "title": "Tessel: List"
+        },
+        {
+            "command": "extension.t2_rename",
+            "title": "Tessel: Rename"
+        },
+        {
+            "command": "extension.t2_wifi_connect",
+            "title": "Tessel: WiFi Connect"
+        },
+        {
+            "command": "extension.t2_wifi",
+            "title": "Tessel: WiFi Info"
+        },
+        {
+            "command": "extension.t2_provision",
+            "title": "Tessel: Provision"
+        },
+        {
+            "command": "extension.t2_update",
+            "title": "Tessel: Update"
+        },
+        {
+            "command": "extension.t2_init",
+            "title": "Tessel: Init"
+        }]
+    },
+    "scripts": {
+        "vscode:prepublish": "node ./node_modules/vscode/bin/compile",
+        "compile": "node ./node_modules/vscode/bin/compile -watch -p ./",
+        "postinstall": "node ./node_modules/vscode/bin/install"
+    },
+    "devDependencies": {
+        "typescript": "^1.8.5",
+        "vscode": "^0.11.0"
+    }
+}

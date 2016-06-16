@@ -17,7 +17,8 @@
         "onCommand:extension.t2_wifi",
         "onCommand:extension.t2_provision",
         "onCommand:extension.t2_update",
-        "onCommand:extension.t2_init"
+        "onCommand:extension.t2_init",
+        "onCommand:extension.t2_run"
     ],
     "main": "./out/src/extension",
     "contributes": {
@@ -48,6 +49,10 @@
         {
             "command": "extension.t2_init",
             "title": "Tessel: Init"
+        },
+        {
+            "command": "extension.t2_run",
+            "title": "Tessel: Run"
         }]
     },
     "scripts": {

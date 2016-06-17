@@ -117,7 +117,7 @@ export function activate(context: vscode.ExtensionContext) {
     let t2_run = vscode.commands.registerCommand('extension.t2_run', () => {
         // The code you place here will be executed every time your command is executed
         
-        const child = execFile('t2', ['run',vscode.workspace.rootPath+'/index.js'], { timeout: 20000 }, (error, stdout, stderr) => {
+        const child = execFile('t2', ['run',vscode.workspace.rootPath+'/index.js'], { timeout: 0 }, (error, stdout, stderr) => {
             if (error) {
                 vscode.window.showErrorMessage(stderr)
             }

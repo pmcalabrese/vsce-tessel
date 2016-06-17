@@ -104,19 +104,18 @@ export function activate(context: vscode.ExtensionContext) {
     let t2_init = vscode.commands.registerCommand('extension.t2_init', () => {
         // The code you place here will be executed every time your command is executed
         
-        const child = execFile('t2', ['init'], { timeout: 0 }, (error, stdout, stderr) => {
+        const child = execFile('t2', ['init'], { cwd:vscode.workspace.rootPath ,timeout: 0 }, (error, stdout, stderr) => {
             if (error) {
                 vscode.window.showErrorMessage(stderr)
             }
             let stdout_array = stdout.split("\n");
-            console.log("stdout",stdout);
             vscode.window.showInformationMessage(stdout_array[stdout_array.length - 2]);
         });
     });
 
     let t2_run = vscode.commands.registerCommand('extension.t2_run', () => {
         // The code you place here will be executed every time your command is executed
-        
+        console.log("vscode.workspace.textDocuments",vscode.workspace.textDocuments);
         const child = execFile('t2', ['run',vscode.workspace.rootPath+'/index.js'], { timeout: 0 }, (error, stdout, stderr) => {
             if (error) {
                 vscode.window.showErrorMessage(stderr)

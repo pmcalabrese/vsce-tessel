@@ -13,46 +13,66 @@
     "activationEvents": [
         "onCommand:extension.t2_list",
         "onCommand:extension.t2_rename",
-        "onCommand:extension.t2_wifi_connect",
+        "onCommand:extension.t2_wifi_config",
         "onCommand:extension.t2_wifi",
         "onCommand:extension.t2_provision",
         "onCommand:extension.t2_update",
         "onCommand:extension.t2_init",
-        "onCommand:extension.t2_run"
+        "onCommand:extension.t2_run",
+        "onCommand:extension.t2_push",
+        "onCommand:extension.t2_erase",
+        "onCommand:extension.t2_version",
+        "onCommand:extension.create_tesselfile"
     ],
     "main": "./out/src/extension",
     "contributes": {
         "commands": [{
             "command": "extension.t2_list",
-            "title": "Tessel: List"
+            "title": "Tessel: List - Lists all connected Tessels and their authorization status."
         },
         {
             "command": "extension.t2_rename",
-            "title": "Tessel: Rename"
+            "title": "Tessel: Rename - Change the name of a Tessel to something new"
         },
         {
-            "command": "extension.t2_wifi_connect",
-            "title": "Tessel: WiFi Connect"
+            "command": "extension.t2_wifi_config",
+            "title": "Tessel: WiFi Config - Configure the wireless connection"
         },
         {
             "command": "extension.t2_wifi",
-            "title": "Tessel: WiFi Info"
+            "title": "Tessel: WiFi Info - Display Tessel's current WiFi connection"
         },
         {
             "command": "extension.t2_provision",
-            "title": "Tessel: Provision"
+            "title": "Tessel: Provision - Authorize your computer to control the USB-connected Tessel"
         },
         {
             "command": "extension.t2_update",
-            "title": "Tessel: Update"
+            "title": "Tessel: Update - Update the Tessel firmware and openWRT image"
         },
         {
             "command": "extension.t2_init",
-            "title": "Tessel: Init"
+            "title": "Tessel: Init - Initialize repository for your Tessel project"
         },
         {
             "command": "extension.t2_run",
-            "title": "Tessel: Run"
+            "title": "Tessel: Run - Deploy a script to Tessel and run it with Node."
+        },
+        {
+            "command": "extension.t2_push",
+            "title": "Tessel: Push - Pushes the file/dir to Flash memory to be run anytime the Tessel is powered, runs the file immediately once the file is copied over."
+        },
+        {
+            "command": "extension.t2_erase",
+            "title": "Tessel: Erase - Erases files pushed to Flash using the tessel push command"
+        },
+        {
+            "command": "extension.t2_version",
+            "title": "Tessel: Version - Display Tessel's current firmware version"
+        },
+        {
+            "command": "extension.create_tesselfile",
+            "title": "Tessel: Create Tesselfile"
         }]
     },
     "scripts": {

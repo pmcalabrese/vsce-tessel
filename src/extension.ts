@@ -69,14 +69,14 @@ export function activate(context: vscode.ExtensionContext) {
             })
             console.info('devices_list',devices_list);
             vscode.window.showInformationMessage("searching...",...devices_list_message).then(value => {
-                const device_name = value.title.split(" ");
-                console.log("device: ",value.title,device_name);
+                let device_name = "";
+                device_name = value.title.split("\t")[2];
                 if (value.title.indexOf('LAN') !== -1) {
-                    writeOptions({lan:true,usb:false},function () {
+                    writeOptions({lan:true,usb:false,name:device_name},function () {
                     });
                 }
                 if (value.title.indexOf('USB') !== -1) {
-                    writeOptions({lan:false,usb:true},function () {
+                    writeOptions({lan:false,usb:true,name:device_name},function () {
                     });  
                 }
                 vscode.window.setStatusBarMessage(devices_list.length + " interface" + (devices_list.length > 1 ? "s" : "") + " found")

@@ -2,7 +2,7 @@
 
 vsce-tessel is a visual studio code extention for manage your tessel 2.
 
-![vsce-tessel]('./vsce-tessel.gif')
+![vsce-tessel](./vsce-tessel.gif)
 
 ## Features
 

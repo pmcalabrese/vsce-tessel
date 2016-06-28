@@ -1,5 +1,5 @@
 # VSCE Tessel
-![vsce-tessel](./vsce-tessel.gif)
+![vsce-tessel](https://www.dropbox.com/s/19ryt9zuoik5s9i/vsce-tessel.gif?dl=0)
 
 vsce-tessel is a visual studio code extention for manage your Tessel 2, it's a wrapper around [t2-cli](https://github.com/tessel/t2-cli).
 

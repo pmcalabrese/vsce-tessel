@@ -2,7 +2,7 @@
     "name": "vsce-tessel",
     "displayName": "Tessel 2",
     "description": "Tessel 2 CLI integration for Visual Studio Code",
-    "version": "0.0.1",
+    "version": "0.0.3",
     "publisher": "pmcalabrese",
     "engines": {
         "vscode": "^1.0.0"
@@ -26,54 +26,56 @@
     ],
     "main": "./out/src/extension",
     "contributes": {
-        "commands": [{
-            "command": "extension.t2_list",
-            "title": "Tessel: List - Lists all connected Tessels and their authorization status."
-        },
-        {
-            "command": "extension.t2_rename",
-            "title": "Tessel: Rename - Change the name of a Tessel to something new"
-        },
-        {
-            "command": "extension.t2_wifi_config",
-            "title": "Tessel: WiFi Config - Configure the wireless connection"
-        },
-        {
-            "command": "extension.t2_wifi",
-            "title": "Tessel: WiFi Info - Display Tessel's current WiFi connection"
-        },
-        {
-            "command": "extension.t2_provision",
-            "title": "Tessel: Provision - Authorize your computer to control the USB-connected Tessel"
-        },
-        {
-            "command": "extension.t2_update",
-            "title": "Tessel: Update - Update the Tessel firmware and openWRT image"
-        },
-        {
-            "command": "extension.t2_init",
-            "title": "Tessel: Init - Initialize repository for your Tessel project"
-        },
-        {
-            "command": "extension.t2_run",
-            "title": "Tessel: Run - Deploy a script to Tessel and run it with Node."
-        },
-        {
-            "command": "extension.t2_push",
-            "title": "Tessel: Push - Pushes the file/dir to Flash memory to be run anytime the Tessel is powered, runs the file immediately once the file is copied over."
-        },
-        {
-            "command": "extension.t2_erase",
-            "title": "Tessel: Erase - Erases files pushed to Flash using the tessel push command"
-        },
-        {
-            "command": "extension.t2_version",
-            "title": "Tessel: Version - Display Tessel's current firmware version"
-        },
-        {
-            "command": "extension.create_tesselfile",
-            "title": "Tessel: Create Tesselfile"
-        }]
+        "commands": [
+            {
+                "command": "extension.t2_list",
+                "title": "Tessel: List - Lists all connected Tessels and their authorization status."
+            },
+            {
+                "command": "extension.t2_rename",
+                "title": "Tessel: Rename - Change the name of a Tessel to something new"
+            },
+            {
+                "command": "extension.t2_wifi_config",
+                "title": "Tessel: WiFi Config - Configure the wireless connection"
+            },
+            {
+                "command": "extension.t2_wifi",
+                "title": "Tessel: WiFi Info - Display Tessel's current WiFi connection"
+            },
+            {
+                "command": "extension.t2_provision",
+                "title": "Tessel: Provision - Authorize your computer to control the USB-connected Tessel"
+            },
+            {
+                "command": "extension.t2_update",
+                "title": "Tessel: Update - Update the Tessel firmware and openWRT image"
+            },
+            {
+                "command": "extension.t2_init",
+                "title": "Tessel: Init - Initialize repository for your Tessel project"
+            },
+            {
+                "command": "extension.t2_run",
+                "title": "Tessel: Run - Deploy a script to Tessel and run it with Node."
+            },
+            {
+                "command": "extension.t2_push",
+                "title": "Tessel: Push - Pushes the file/dir to Flash memory to be run anytime the Tessel is powered, runs the file immediately once the file is copied over."
+            },
+            {
+                "command": "extension.t2_erase",
+                "title": "Tessel: Erase - Erases files pushed to Flash using the tessel push command"
+            },
+            {
+                "command": "extension.t2_version",
+                "title": "Tessel: Version - Display Tessel's current firmware version"
+            },
+            {
+                "command": "extension.create_tesselfile",
+                "title": "Tessel: Create Tesselfile"
+            }
+        ]
     },
     "scripts": {
         "vscode:prepublish": "node ./node_modules/vscode/bin/compile",
@@ -81,7 +83,7 @@
         "postinstall": "node ./node_modules/vscode/bin/install"
     },
     "devDependencies": {
-        "typescript": "^1.8.5",
-        "vscode": "^0.11.0"
+        "typescript": "^1.8.10",
+        "vscode": "^0.11.13"
     }
 }

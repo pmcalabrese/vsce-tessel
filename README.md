@@ -11,13 +11,13 @@ vsce-tessel supports most of the commands provided by [t2-cli](https://github.co
 
 ## Requirements
 
-you need to have [t2-cli](https://github.com/tessel/t2-cli) installed.
+You need to have [t2-cli](https://github.com/tessel/t2-cli) installed.
 
 ## Extension Settings
 
-vsce-tessel extentions uses tesselfile.json. This files contains some configurations used by plugin and it's very useful when you have multiple projects, or multiple board connected at the same time.
+vsce-tessel extention uses tesselfile.json. This file contains some configurations used by the plugin. It's very useful when you have multiple projects, or multiple boards connected at the same time.
 
-For example you can config the name of the board where you want to deploy the code on, so when you run the command `run` it will run on that specific board. It's also a convinente way to share configurations. 
+For example, you could config the name of the board where you want to deploy the code on, so when you run the command `run` it will run on that specific board. It's also a convenient way to share configurations across multiple team members. 
 
 ## Known Issues
 
@@ -25,6 +25,17 @@ After call the run commands the board needs to be resetted for quit the current 
 
 ## Release Notes
 
-### 1.0.0
+### 0.0.1
 
 Initial release
+
+### 0.0.2
+
+- Better README
+- Add video link
+- Remove console log
+
+### 0.0.3
+
+- Better README
+- Upgrade dependencies

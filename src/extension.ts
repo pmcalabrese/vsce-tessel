@@ -28,7 +28,6 @@ export function activate(context: vscode.ExtensionContext) {
 
     // Use the console to output diagnostic information (console.log) and errors (console.error)
     // This line of code will only be executed once when your extension is activated
-    console.log('Congratulations, your extension "tessel" is now active!');
 
     // The command has been defined in the package.json file
     // Now provide the implementation of the command with  registerCommand
@@ -53,7 +52,7 @@ export function activate(context: vscode.ExtensionContext) {
     }
 
     let t2_list = vscode.commands.registerCommand('extension.t2_list', () => {
-        // The code you place here will be executed every time your command is executed
+
         const child = execFile('t2', ['list'], { timeout: 0 }, (error, stdout, stderr) => {
             if (error) {
                 vscode.window.showErrorMessage(stderr)
@@ -85,7 +84,7 @@ export function activate(context: vscode.ExtensionContext) {
     });
 
     let t2_rename = vscode.commands.registerCommand('extension.t2_rename', () => {
-        // The code you place here will be executed every time your command is executed
+
         vscode.window.showInputBox({ placeHolder: 'device name'}).then(value => {
             const child = execFile('t2', ['rename '+value], { timeout: 0 }, (error, stdout, stderr) => {
                 if (error) {
@@ -97,7 +96,7 @@ export function activate(context: vscode.ExtensionContext) {
     });
 
     let t2_wifi_cofig = vscode.commands.registerCommand('extension.t2_wifi_cofig', () => {
-        // The code you place here will be executed every time your command is executed
+
         vscode.window.showInputBox({ placeHolder: 'network name'}).then(network_name => {
             vscode.window.showInputBox({ placeHolder: 'password', password: true}).then(password => {
                 const child = execFile('t2', ['wifi -n '+network_name+ ' -p '+ password], { timeout: 0 }, (error, stdout, stderr) => {
@@ -111,20 +110,19 @@ export function activate(context: vscode.ExtensionContext) {
     });
 
     let t2_wifi = vscode.commands.registerCommand('extension.t2_wifi', () => {
-        // The code you place here will be executed every time your command is executed
+
         
         const child = execFile('t2', ['wifi'], { timeout: 0 }, (error, stdout, stderr) => {
             if (error) {
                 vscode.window.showErrorMessage(stderr)
             }
             let out = stderr.replace("/\n/g"," ").replace("/\t/g"," ").replace("INFO","");
-            console.log("out",out)
             vscode.window.showInformationMessage(out);
         });
     });
 
     let t2_provision = vscode.commands.registerCommand('extension.t2_provision', () => {
-        // The code you place here will be executed every time your command is executed
+
         
         const child = execFile('t2',['provision'], { timeout: 0 }, (error, stdout, stderr) => {
             if (error) {
@@ -136,7 +134,7 @@ export function activate(context: vscode.ExtensionContext) {
     });
 
     let t2_update = vscode.commands.registerCommand('extension.t2_update', () => {
-        // The code you place here will be executed every time your command is executed
+
         
         const child = execFile('t2', ['update'], { timeout: 0 }, (error, stdout, stderr) => {
             if (error) {
@@ -148,7 +146,7 @@ export function activate(context: vscode.ExtensionContext) {
     });
 
     let t2_init = vscode.commands.registerCommand('extension.t2_init', () => {
-        // The code you place here will be executed every time your command is executed
+
         
         const child = execFile('t2', ['init'], { cwd:vscode.workspace.rootPath ,timeout: 0 }, (error, stdout, stderr) => {
             if (error) {
@@ -160,8 +158,7 @@ export function activate(context: vscode.ExtensionContext) {
     });
 
     let t2_run = vscode.commands.registerCommand('extension.t2_run', () => {
-        // The code you place here will be executed every time your command is executed
-        console.log("vscode.workspace.textDocuments",vscode.workspace.textDocuments);
+
         readOptions(options => {
             var flags: string = "";
             if (options.lan) {
@@ -178,72 +175,59 @@ export function activate(context: vscode.ExtensionContext) {
                     vscode.window.showErrorMessage(stderr_array[stderr_array.length - 2])
                 }
                 let stdout_array = stdout.split("\n");
-                console.log("stdout",stdout);
-                console.log("stderr",stderr);
                 vscode.window.showInformationMessage(stdout_array[stdout_array.length - 2]);
             });
             child.on('close', function(code) {
-                console.log('closing code: ' + code);
+
             });
         })
     });
 
     let t2_push = vscode.commands.registerCommand('extension.t2_push', () => {
-        // The code you place here will be executed every time your command is executed
-        console.log("vscode.workspace.textDocuments",vscode.workspace.textDocuments);
+
         const child = execFile('t2', ['push',vscode.workspace.rootPath+'/index.js'], { timeout: 0 }, (error, stdout, stderr) => {
             if (error) {
                 let stderr_array = stderr.split("\n");
                 vscode.window.showErrorMessage(stderr_array[stderr_array.length - 2])
             }
             let stdout_array = stdout.split("\n");
-            console.log("stdout",stdout);
-            console.log("stderr",stderr);
             vscode.window.showInformationMessage(stdout_array[stdout_array.length - 2]);
         });
         child.on('close', function(code) {
-            console.log('closing code: ' + code);
         });
     });
 
     let t2_erase = vscode.commands.registerCommand('extension.t2_erase', () => {
-        // The code you place here will be executed every time your command is executed
-        console.log("vscode.workspace.textDocuments",vscode.workspace.textDocuments);
+
         const child = execFile('t2', ['erase'], { timeout: 0 }, (error, stdout, stderr) => {
             if (error) {
                 let stderr_array = stderr.split("\n");
                 vscode.window.showErrorMessage(stderr_array[stderr_array.length - 2])
             }
             let stdout_array = stdout.split("\n");
-            console.log("stdout",stdout);
-            console.log("stderr",stderr);
             vscode.window.showInformationMessage(stdout_array[stdout_array.length - 2]);
         });
         child.on('close', function(code) {
-            console.log('closing code: ' + code);
         });
     });
 
     let t2_version = vscode.commands.registerCommand('extension.t2_version', () => {
-        // The code you place here will be executed every time your command is executed
-        console.log("vscode.workspace.textDocuments",vscode.workspace.textDocuments);
+
         const child = execFile('t2', ['version'], { timeout: 0 }, (error, stdout, stderr) => {
             if (error) {
                 let stderr_array = stderr.split("\n");
                 vscode.window.showErrorMessage(stderr_array[stderr_array.length - 2])
             }
             let stdout_array = stdout.split("\n");
-            console.log("stdout",stdout);
-            console.log("stderr",stderr);
             vscode.window.showInformationMessage(stdout_array[stdout_array.length - 2]);
         });
         child.on('close', function(code) {
-            console.log('closing code: ' + code);
+
         });
     });
 
     let create_tesselfile = vscode.commands.registerCommand('extension.create_tesselfile', () => {
-        // The code you place here will be executed every time your command is executed
+
         const options = {
             timeout: 5,
             key:'',
@@ -276,3 +260,7 @@ export function activate(context: vscode.ExtensionContext) {
 // this method is called when your extension is deactivated
 export function deactivate() {
 }
+
+/* TODO options to flag */
+/* TODO like run, push should do the same trick */
+/* readOptions should be able to run without .tesselfile*/

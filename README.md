@@ -21,7 +21,6 @@ For example, you could config the name of the board where you want to deploy the
 
 ## Known Issues
 
-After call the run commands the board needs to be resetted for quit the current script.
 
 ## Release Notes
 
@@ -39,3 +38,8 @@ Initial release
 
 - Better README
 - Upgrade dependencies
+
+### 0.0.4
+
+- Improved run, push and erase commands
+- Added stop command for stop script launched with the `run` command (equivalent to the CMD+C in the terminal)

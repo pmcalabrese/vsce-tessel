@@ -2,8 +2,9 @@
 // The module 'vscode' contains the VS Code extensibility API
 // Import the module and reference it with the alias vscode in your code below
 import * as vscode from 'vscode';
-import {execFile,execSync} from 'child_process';
+import {execFile,execSync,spawn} from 'child_process';
 import * as fs from 'fs';
+import * as path from 'path';
 
 export interface IOptions {
     /** Set timeout in seconds for scanning for networked tessels  [5] */
@@ -34,8 +35,27 @@ export function activate(context: vscode.ExtensionContext) {
     // The commandId parameter must match the command field in package.json
     function readOptions(cb) {
         fs.readFile(vscode.workspace.rootPath+'/tesselfile.json', (err, options) => {
-            cb(JSON.parse(options.toString()));
+            if (err) {
+                cb(null);
+            } else {
+                cb(JSON.parse(options.toString()));
+            }
         });
+    }
+
+    function optionsToFlag(options: IOptions) {
+        let flags:string = null;
+        if (options) {
+            if (options.lan) {
+                flags = "--lan" 
+            } else if (options.usb) {
+                flags = "--usb"
+            }
+            if (options.lanPrefer) {
+                flags += " --lanPrefer"
+            }
+        }
+        return flags;
     }
 
     function readOption(option, cb) {
@@ -157,57 +177,73 @@ export function activate(context: vscode.ExtensionContext) {
         });
     });
 
+    let childRun = null;
+
     let t2_run = vscode.commands.registerCommand('extension.t2_run', () => {
-
         readOptions(options => {
-            var flags: string = "";
-            if (options.lan) {
-                flags = "--lan" 
-            } else if (options.usb) {
-                flags = "--usb"
+            let execArray = ['run'];
+            let flags = optionsToFlag(options);
+            if (flags) {
+                execArray.push(flags)
             }
-            if (options.lanPrefer) {
-                flags += " --lanPrefer"
-            }
-            const child = execFile('t2', ['run',flags,vscode.workspace.rootPath+'/index.js'], { timeout: 0 }, (error, stdout, stderr) => {
-                if (error) {
-                    let stderr_array = stderr.split("\n");
-                    vscode.window.showErrorMessage(stderr_array[stderr_array.length - 2])
-                }
-                let stdout_array = stdout.split("\n");
-                vscode.window.showInformationMessage(stdout_array[stdout_array.length - 2]);
+            execArray.push(path.join(vscode.workspace.rootPath,'index.js'));
+            if (childRun) {
+                childRun.kill('SIGINT');
+            } 
+            childRun = spawn('t2',execArray);
+            childRun.stdout.on('data', function(data) {
+                vscode.window.setStatusBarMessage(data.toString());
             });
-            child.on('close', function(code) {
+            childRun.stderr.on('data', function(data) {
+                vscode.window.setStatusBarMessage(data.toString());
+            });
+        });
+    });
 
-            });
-        })
+    let t2_stop = vscode.commands.registerCommand('extension.t2_stop', () => {
+        readOptions(options => {
+            if (childRun) {
+                childRun.kill('SIGINT');
+                vscode.window.setStatusBarMessage('Script stopped');
+            } else {
+                vscode.window.setStatusBarMessage('ERR There is no script running');
+            }
+        });
     });
 
     let t2_push = vscode.commands.registerCommand('extension.t2_push', () => {
-
-        const child = execFile('t2', ['push',vscode.workspace.rootPath+'/index.js'], { timeout: 0 }, (error, stdout, stderr) => {
-            if (error) {
-                let stderr_array = stderr.split("\n");
-                vscode.window.showErrorMessage(stderr_array[stderr_array.length - 2])
+        readOptions(options => {
+            let execArray = ['push'];
+            let flags = optionsToFlag(options);
+            if (flags) {
+                execArray.push(flags)
             }
-            let stdout_array = stdout.split("\n");
-            vscode.window.showInformationMessage(stdout_array[stdout_array.length - 2]);
-        });
-        child.on('close', function(code) {
+            execArray.push(path.join(vscode.workspace.rootPath,'index.js'));
+            const child = spawn('t2',execArray);
+            child.stdout.on('data', function(data) {
+                vscode.window.setStatusBarMessage(data.toString());
+            });
+            child.stderr.on('data', function(data) {
+                vscode.window.setStatusBarMessage(data.toString());
+            });
         });
     });
 
     let t2_erase = vscode.commands.registerCommand('extension.t2_erase', () => {
-
-        const child = execFile('t2', ['erase'], { timeout: 0 }, (error, stdout, stderr) => {
-            if (error) {
-                let stderr_array = stderr.split("\n");
-                vscode.window.showErrorMessage(stderr_array[stderr_array.length - 2])
+        readOptions(options => {
+            let execArray = ['erase'];
+            let flags = optionsToFlag(options);
+            if (flags) {
+                execArray.push(flags)
             }
-            let stdout_array = stdout.split("\n");
-            vscode.window.showInformationMessage(stdout_array[stdout_array.length - 2]);
-        });
-        child.on('close', function(code) {
+            execArray.push(path.join(vscode.workspace.rootPath,'index.js'));
+            const child = spawn('t2',execArray);
+            child.stdout.on('data', function(data) {
+                vscode.window.setStatusBarMessage(data.toString());
+            });
+            child.stderr.on('data', function(data) {
+                vscode.window.setStatusBarMessage(data.toString());
+            });
         });
     });
 
@@ -252,6 +288,7 @@ export function activate(context: vscode.ExtensionContext) {
     context.subscriptions.push(t2_update);
     context.subscriptions.push(t2_init);
     context.subscriptions.push(t2_run);
+    context.subscriptions.push(t2_stop);
     context.subscriptions.push(t2_push);
     context.subscriptions.push(t2_erase);
     context.subscriptions.push(create_tesselfile);

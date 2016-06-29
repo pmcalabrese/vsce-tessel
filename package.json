@@ -2,7 +2,7 @@
     "name": "vsce-tessel",
     "displayName": "Tessel 2",
     "description": "Tessel 2 CLI integration for Visual Studio Code",
-    "version": "0.0.3",
+    "version": "0.0.4",
     "publisher": "pmcalabrese",
     "engines": {
         "vscode": "^1.0.0"
@@ -19,6 +19,7 @@
         "onCommand:extension.t2_update",
         "onCommand:extension.t2_init",
         "onCommand:extension.t2_run",
+        "onCommand:extension.t2_stop",
         "onCommand:extension.t2_push",
         "onCommand:extension.t2_erase",
         "onCommand:extension.t2_version",
@@ -58,6 +59,10 @@
             {
                 "command": "extension.t2_run",
                 "title": "Tessel: Run - Deploy a script to Tessel and run it with Node."
+            },
+            {
+                "command": "extension.t2_stop",
+                "title": "Tessel: Stop - Stop a running script."
             },
             {
                 "command": "extension.t2_push",
